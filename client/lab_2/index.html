@@ -2,44 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Kaiyuan Zhang's Labs</title>
+    <meta http-equiv="X-UA_Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaiyuan Zhang's INST377 Labs</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div>
-    <header><h1>Kaiyuan Zhang's Labs For INST377</h1><header>
-    <div> 
-      <h3> Album Names </h3>
-      <ol>
-        <li> God did - DJKhaled </li>
-        <li> Renaissance - Beyonce</li>
-        <li> Beautiful Mind - Rod Wave</li>
-        <li> Harry's House - Harry Styles</li>
-        <li> The Forever Story - JID </li>
-     </ol>
-    </div>
-    <div>
-    <h2> Image Carousel </h2>
-    <img src='images/mochi.gif'/>
-    <img src='images/mochi.jpg'/>
-    <img src='images/mochi.png'/>
-    <img src='images/mochi.svg'/>
-
+  <div class="wrapper">
+    <!-- wrapper -->
+    <header class="header"><h1>Kaiyuan Zhang's Labs For INST377</h1><header>
+    <div class="container"> 
+      <!-- container -->
+      <div class="left_section box">
+        <!-- left input-->
+        <h2> Album Names </h2>
+        <ol class="box">
+            <li> God did - DJKhaled </li>
+            <li> Renaissance - Beyonce</li>
+            <li> Beautiful Mind - Rod Wave</li>
+            <li> Harry's House - Harry Styles</li>
+            <li> The Forever Story - JID </li>
+        </ol>
+      </div>
+      <div class="right_section box">
+      <!--right side-->
+        <h2> Image Carousel </h2>
+        <div class="grid"> <!-- image box-->
+            <img id="slide_1" src="images/mochi.gif" alt="A rice ball"/>
+            <img id="slide_2" img src="images/mochi.jpg" alt="Another rice ball"/>
+            <img id="slide_3"  src="images/mochi.png" alt="Third rice ball"/>
+            <img id="slide_4"  src="images/mochi.svg" alt="fouth rice ball"/>
+        </div>
+        <div class="box">
+            <!-- description box -->
+            four mochi in order: gif, jpg, png, svg
+        </div>
+      </div>
     </div>
   </div>
- 
-  <footer>KAIYUAN ZHANG'S GITHUB ACCOUNT<a href="https://github.com/iakaiang" target="_blank" rel="noopener noreferrer">Kaiyuan Zhang Github Account</a><footer>
+  <footer class="footer">KAIYUAN ZHANG'S GITHUB ACCOUNT<a href="https://github.com/iakaiang" target="_blank" rel="noopener noreferrer">Kaiyuan Zhang Github Account</a><footer>
   </body>
-
 </html>
-
-
-Replace this with your complete HTML from Lab 1
-
-Hook it up to CSS by including style.css in the <head> tag
-
-Then add CSS class names to your HTML to make it look like the lab pictures.
-For example: <div class="selector">
-
-You should not need to edit the CSS to do this, only the HTML.
-
-Don't forget to add an actual set of image descriptions to your image carousel.
