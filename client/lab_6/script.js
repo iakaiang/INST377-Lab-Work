@@ -79,7 +79,7 @@ async function mainEvent() {
   // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
   const submit = document.querySelector('#get-resto'); // get a reference to your submit button
-  const loadAnimation = document.querySelector('.lds.ellipses');
+  const loadAnimation = document.querySelector('.lds.ellipsis');
   submit.style.display = 'none'; // let your submit button disappear
 
   /*
@@ -96,7 +96,7 @@ async function mainEvent() {
     Dot notation is preferred in JS unless you have a good reason to use brackets
     The 'data' key, which we set at line 38 in foodServiceRoutes.js, contains all 1,000 records we need
   */
-  console.table(arrayFromJson.data);
+  // console.table(arrayFromJson.data);
 
   // in your browser console, try expanding this object to see what fields are available to work with
   // for example: arrayFromJson.data[0].name, etc

@@ -3,6 +3,14 @@
     This comes from loading.io/css - it's nice to show that something is happening!
 */
 
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
 .lds-ellipsis {
     display: inline-block;
     position: relative;
@@ -10,7 +18,7 @@
     height: 80px;
   }
   
-  .lds-ellipsis_hidden{
+  .lds-ellipsis_hidden {
     display: hidden;
   }
   .lds-ellipsis div {
@@ -243,6 +251,7 @@ form {
   color: rgb(246, 169, 93);
   text-decoration: none;
 }
+
 
 
 form input {
