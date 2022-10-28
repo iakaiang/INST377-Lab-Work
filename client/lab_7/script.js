@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable max-len */
 
 /*
@@ -10,10 +11,13 @@
     Under this comment place any utility functions you need - like an inclusive random number selector
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 */
+
 function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() = (max - min +1) + min);
+  // eslint-disable-next-line no-param-reassign
+  min = Math.ceil(min);
+  // eslint-disable-next-line no-param-reassign
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
 }
 
 function injectHTML(list) {
@@ -29,6 +33,7 @@ function injectHTML(list) {
     el.innerText = item.name;
     listEl.appendChild(el);
   });
+
   /*
     ## JS and HTML Injection
       There are a bunch of methods to inject text or HTML into a document using JS
@@ -37,7 +42,6 @@ function injectHTML(list) {
       the usual ones are element.innerText and element.innerHTML
       Here's an article on the differences if you want to know more:
       https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent#differences_from_innertext
-
     ## What to do in this function
       - Accept a list of restaurant objects
       - using a .forEach method, inject a list element into your index.html for every element in the list
@@ -53,24 +57,32 @@ function processRestaurants(list) {
     return list[index];
   });
   return newArray;
+
   /*
       ## Process Data Separately From Injecting It
         This function should accept your 1,000 records
         then select 15 random records
         and return an object containing only the restaurant's name, category, and geocoded location
         So we can inject them using the HTML injection function
-
         You can find the column names by carefully looking at your single returned record
         https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz
-
       ## What to do in this function:
-
       - Create an array of 15 empty elements (there are a lot of fun ways to do this, and also very basic ways)
       - using a .map function on that range,
       - Make a list of 15 random restaurants from your list of 100 from your data request
       - Return only their name, category, and location
       - Return the new list of 15 restaurants so we can work on it separately in the HTML injector
     */
+}
+
+function filterList(array, filterInputValue) {
+  return newArray = array.filter((item) => {
+    if (!item.name) { return; }
+    const lowerCaseName = item.name.toLowerCase();
+    const lowerCaseQuery = filterInputValue.toLowerCase();
+    // eslint-disable-next-line consistent-return
+    return lowerCaseName.includes(lowerCaseQuery);
+  });
 }
 
 async function mainEvent() {
@@ -84,7 +96,7 @@ async function mainEvent() {
   // the async keyword means we can make API requests
   const form = document.querySelector('.main_form'); // get your main form so you can do JS with it
   const submit = document.querySelector('#get-resto'); // get a reference to your submit button
-  const loadAnimation = document.querySelector('.lds.ellipsis');
+  const loadAnimation = document.querySelector('.lds-ellipsis');
   submit.style.display = 'none'; // let your submit button disappear
 
   /*
@@ -101,7 +113,7 @@ async function mainEvent() {
       Dot notation is preferred in JS unless you have a good reason to use brackets
       The 'data' key, which we set at line 38 in foodServiceRoutes.js, contains all 1,000 records we need
     */
-  // console.table(arrayFromJson.data);
+  console.table(arrayFromJson.data);
 
   // in your browser console, try expanding this object to see what fields are available to work with
   // for example: arrayFromJson.data[0].name, etc
@@ -113,9 +125,17 @@ async function mainEvent() {
   // This IF statement ensures we can't do anything if we don't have information yet
   if (arrayFromJson.data?.length > 0) { // the question mark in this means "if this is set at all"
     submit.style.display = 'block'; // let's turn the submit button back on by setting it to display as a block when we have data available
-
     loadAnimation.classList.remove('lds-ellipsis');
     loadAnimation.classList.add('lds-ellipsis_hidden');
+
+    let currentList = [];
+
+    form.addEventListener('input', (event) => {
+      console.log(event.target.value);
+      const filteredList = filterList(currentList, event.target.value);
+      injectHTML(filteredList);
+    });
+
     // And here's an eventListener! It's listening for a "submit" button specifically being clicked
     // this is a synchronous event event, because we already did our async request above, and waited for it to resolve
     form.addEventListener('submit', (submitEvent) => {
@@ -123,10 +143,11 @@ async function mainEvent() {
       submitEvent.preventDefault();
 
       // This constant will have the value of your 15-restaurant collection when it processes
-      const restaurantList = processRestaurants(arrayFromJson.data);
-      console.log(restaurantList);
+      currentList = processRestaurants(arrayFromJson.data);
+      //   console.log(currentList);
+
       // And this function call will perform the "side effect" of injecting the HTML list for you
-      injectHTML(restaurantList);
+      injectHTML(currentList);
 
       // By separating the functions, we open the possibility of regenerating the list
       // without having to retrieve fresh data every time
